@@ -1,0 +1,18 @@
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    padding-bottom: 8px;
+  }
+  a {
+    text-decoration: none;
+    padding-left: 4px;
+    color: #a38e80;
+  }
+}
