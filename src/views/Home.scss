@@ -1,7 +1,14 @@
 .leaflet-container {
-  height: 60vh;
+  height: 90vh;
 }
 
+.marker-container {
+  &:hover {
+    .icon-marker-tooltip {
+      display: block;
+    }
+  }
+}
 .icon-marker {
   display: flex;
   position: relative;
@@ -12,15 +19,9 @@
   height: 3.6em;
   font-size: 0.7em;
   font-weight: bold;
-  background-color: #c62828;
+  border-color: rgb(198, 40, 40);
+  background-color: rgba(198, 40, 40, 0.5);
   border-radius: 100%;
-  box-shadow: 0 2px 5px rgba(black, 0.9);
-
-  &:hover {
-    .icon-marker-tooltip {
-      display: block;
-    }
-  }
 }
 
 .icon-marker-tooltip {
@@ -34,7 +35,7 @@
   border-radius: 0.4em;
   margin-bottom: 1em;
   box-shadow: 0 3px 5px rgba(black, 0.9);
-
+  color: white;
   &:before {
     display: block;
     position: absolute;

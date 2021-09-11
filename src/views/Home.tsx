@@ -1,12 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import "./Home.scss";
+import { getMarkerHTML } from "../utils/map";
 
 export const Home = () => {
   const [data, setData] = useState<any>([]);
   const [map, setMap] = useState<any>();
-
+  const didMount = useRef<boolean>(false);
   const fetchData = useCallback(() => {
     const url = "https://corona.lmao.ninja/v2/countries";
     fetch(url)
@@ -25,7 +26,7 @@ export const Home = () => {
   }, []);
 
   useEffect(() => {
-    if (map && data) {
+    if (map && data && !didMount.current) {
       formatGeoData(data);
     }
     // eslint-disable-next-line
@@ -56,52 +57,24 @@ export const Home = () => {
     const geoJsonLayers = new L.GeoJSON(geoJson, {
       pointToLayer: (feature, latlng) => {
         const { properties = {} } = feature;
-        let updatedFormatted;
-        let casesString;
-
-        const { country, updated, cases, deaths, recovered } = properties;
-
-        casesString = `${cases}`;
-
-        if (cases > 1000) {
-          casesString = `${casesString.slice(0, -3)}k+`;
-        }
-
-        if (updated) {
-          updatedFormatted = new Date(updated).toLocaleString();
-        }
-
-        const html = `
-      <span class="icon-marker">
-        <span class="icon-marker-tooltip">
-          <h2>${country}</h2>
-          <ul>
-            <li><strong>Confirmed:</strong> ${cases}</li>
-            <li><strong>Deaths:</strong> ${deaths}</li>
-            <li><strong>Recovered:</strong> ${recovered}</li>
-            <li><strong>Last Update:</strong> ${updatedFormatted}</li>
-          </ul>
-        </span>
-        ${casesString}
-      </span>
-    `;
 
         return L.marker(latlng, {
           icon: L.divIcon({
             className: "icon",
-            html,
+            html: getMarkerHTML(properties),
           }),
           riseOnHover: true,
         });
       },
     });
     geoJsonLayers.addTo(map);
+    didMount.current = true;
   };
 
   return (
     <MapContainer
-      center={[35, 40]}
-      zoom={2}
+      center={[0, 0]}
+      zoom={2.3}
       scrollWheelZoom={false}
       whenCreated={setMap}
     >
