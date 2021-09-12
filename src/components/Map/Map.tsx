@@ -1,22 +1,14 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { MapContainer, TileLayer, LayersControl } from "react-leaflet";
 import L from "leaflet";
 import "./Map.scss";
 import { getMarkerHTML } from "../../utils/map";
-import { GlobalContext } from "../../context/GlobalContext";
 
 export const Map = () => {
   const [data, setData] = useState<any>([]);
   const [map, setMap] = useState<any>();
   const didMount = useRef<boolean>(false);
-  const { darkTheme } = useContext(GlobalContext);
-  console.log(darkTheme);
+
   const fetchData = useCallback(() => {
     const url = "https://corona.lmao.ninja/v2/countries";
     fetch(url)
@@ -87,18 +79,22 @@ export const Map = () => {
       scrollWheelZoom={false}
       whenCreated={setMap}
     >
-      <TileLayer
-        attribution={
-          darkTheme
-            ? `&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>`
-            : `&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors`
-        }
-        url={
-          darkTheme
-            ? "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
-            : "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        }
-      />
+      <LayersControl>
+        <LayersControl.BaseLayer checked name="OpenStreetMap">
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+        </LayersControl.BaseLayer>
+        <LayersControl.BaseLayer name="Dark theme">
+          <TileLayer
+            attribution={`&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>`}
+            url={
+              "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png"
+            }
+          />
+        </LayersControl.BaseLayer>
+      </LayersControl>
     </MapContainer>
   );
 };
