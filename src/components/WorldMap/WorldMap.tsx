@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { MapContainer, TileLayer, LayersControl } from "react-leaflet";
 import L from "leaflet";
-import "./Map.scss";
+import "./WorldMap.scss";
 import { getMarkerHTML } from "../../utils/map";
 
-export const Map = () => {
+export const WorldMap = () => {
   const [data, setData] = useState<any>([]);
   const [map, setMap] = useState<any>();
   const didMount = useRef<boolean>(false);

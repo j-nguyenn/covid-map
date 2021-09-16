@@ -2,7 +2,8 @@ import React, { useState } from "react";
 
 import "./Home.scss";
 import { Footer } from "../components/Footer/Footer";
-import { Map } from "../components/Map/Map";
+import { WorldMap } from "../components/WorldMap/WorldMap";
+import { OverviewTab } from "../components/OverviewTab/OverviewTab";
 import { GlobalContext } from "../context/GlobalContext";
 
 export const Home = () => {
@@ -10,7 +11,8 @@ export const Home = () => {
 
   return (
     <GlobalContext.Provider value={{ darkTheme, setDarkTheme }}>
-      <Map />
+      <WorldMap />
+      <OverviewTab />
       <Footer />
     </GlobalContext.Provider>
   );

@@ -1,0 +1,32 @@
+.tabs-wrapper {
+  display: flex;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+.block {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  .block-main,
+  .block-extra {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .label-big {
+    font-size: 20px;
+  }
+  .number-big {
+    font-size: 32px;
+  }
+  .block-extra {
+    padding-top: 12px;
+  }
+}
+
+.last-updated {
+  text-align: center;
+  font-size: 12px;
+  font-style: italic;
+}

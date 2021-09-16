@@ -1,5 +1,5 @@
 import React from "react";
-import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
+//import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
 import "./Footer.scss";
 
 export const Footer = () => {
@@ -17,9 +17,9 @@ export const Footer = () => {
           </small>
         </div>
       </div>
-      <div className="grid">
+      {/* <div className="grid">
         <ThemeSwitcher />
-      </div>
+      </div> */}
     </footer>
   );
 };
