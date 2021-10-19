@@ -4,7 +4,7 @@ import "./OverviewTab.scss";
 export const OverviewTab = () => {
   const [data, setData] = useState<any>({});
   const fetchData = useCallback(() => {
-    const url = "https://corona.lmao.ninja/v2/all";
+    const url = "https://disease.sh/v3/covid-19/historical/all";
     fetch(url)
       .then((res) => res.json())
       .then((res) => {

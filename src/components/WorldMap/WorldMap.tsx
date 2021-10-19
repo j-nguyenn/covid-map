@@ -10,7 +10,7 @@ export const WorldMap = () => {
   const didMount = useRef<boolean>(false);
 
   const fetchData = useCallback(() => {
-    const url = "https://corona.lmao.ninja/v2/countries";
+    const url = "https://disease.sh/v3/covid-19/countries";
     fetch(url)
       .then((res) => res.json())
       .then((res) => {
